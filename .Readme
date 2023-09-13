@@ -1,0 +1,40 @@
+iniciar container sin logs
+
+# docker-compose up -d
+
+iniciar containers sin logs y nueva contruccion
+
+# docker-compose up -d --build
+
+consultar estado containers
+
+# docker-compose ps 
+
+bajar containers
+
+# docker-compose down -v
+
+mostrar logs de container
+
+# docker-compose logs
+
+logs en tiempo real 
+
+# docker-compose logs -f
+
+listar una red 
+
+# docker network ls
+
+inspeccionar una red
+
+# docker network inspect container_name
+
+crear una red en docker
+
+# docker network create nombre_red
+
+crear una red en docker definida
+
+# docker network create nombre_red --subnet=IP/mascara
+

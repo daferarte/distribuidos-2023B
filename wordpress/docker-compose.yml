@@ -1,0 +1,21 @@
+version: '3.1'
+
+services:
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./wordpress_data:/var/www/html
+    networks:
+      - prueba2
+
+networks:
+    prueba2:
+        driver: bridge
+        external: true
+
+volumes:
+  wordpress:
