@@ -2,3 +2,4 @@ datadir
 local_pgdata
 pgadmin-data
 wordpress_data
+node_modules
