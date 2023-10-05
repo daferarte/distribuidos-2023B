@@ -1,52 +1,54 @@
 version: "3.9"
 
 services:
-  backend:
+  backend-dev:
     restart: always
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
-      - "3000:3000"
+      - "1000:3000"
+    volumes:
+      - ./backend/servidor:/usr/src/app
     networks:
-      - prodnet
+      - devnet
 
-  front:
+  front-dev:
     restart: always
     build:
       context: ./fronted
       dockerfile: Dockerfile
     ports:
-      - "4000:3000"
+      - "2000:3000"
     networks:
-      - prodnet
+      - devnet
   
-  db:
+  db-dev:
     image: postgres
     restart: always
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       POSTGRES_PASSWORD: "12345"
     volumes:
-      - ./baseDatos/local_pgdata:/var/lib/postgresql/data
+      - ./baseDatos/local_pgdata_dev:/var/lib/postgresql/data
     networks:
-      - prodnet
+      - devnet
 
-  pgadmin:
+  pgadmin-dev:
     image: dpage/pgadmin4
-    container_name: pgadmin4_container3
     restart: always
     ports:
-      - "8080:80"
+      - "8081:80"
     environment:
       PGADMIN_DEFAULT_EMAIL: dani@dani.com
       PGADMIN_DEFAULT_PASSWORD: "12345"
     volumes:
-      - ./baseDatos/pgadmin-data:/var/lib/pgadmin
+      - ./baseDatos/pgadmin_data_dev:/var/lib/pgadmin
     networks:
-      - prodnet
-  
+      - devnet
+
 networks:
-    prodnet:
+    devnet:
       driver: bridge
+  

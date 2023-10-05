@@ -3,3 +3,5 @@ local_pgdata
 pgadmin-data
 wordpress_data
 node_modules
+local_pgdata_dev
+pgadmin_data_dev

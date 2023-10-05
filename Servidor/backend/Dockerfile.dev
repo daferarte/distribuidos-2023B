@@ -5,6 +5,7 @@ WORKDIR /usr/src/app
 
 RUN npm install prisma --save-dev
 RUN npm install @prisma/client
+RUN npm install -g nodemon
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -19,4 +20,4 @@ COPY ./servidor/ .
 
 EXPOSE 3000
 
-CMD [ "node", "app.js" ]
+CMD [ "nodemon", "app.js" ]
