@@ -20,6 +20,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "2000:3000"
+    volumes:
+      - ./fronted/fronted:/usr/src/app
     networks:
       - devnet
   
@@ -32,6 +34,18 @@ services:
       POSTGRES_PASSWORD: "12345"
     volumes:
       - ./baseDatos/local_pgdata_dev:/var/lib/postgresql/data
+    networks:
+      - devnet
+
+  db-auditoria:
+    image: postgres
+    restart: always
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_PASSWORD: "123456"
+    volumes:
+      - ./baseDatos/local_pgdata_audit:/var/lib/postgresql/data
     networks:
       - devnet
 
