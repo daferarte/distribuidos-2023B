@@ -1,8 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react';
 
-const Form = ()=>{
+const Form = ({showed})=>{
   const [title,setTitle]=useState("");
   const [body,setBody]=useState("");
+
+  const firsInput = useRef();
+
+  useEffect(()=>{
+    firsInput.current.focus();
+  },[showed])
 
   const sendForm = (ev) =>{
     ev.preventDefault();
@@ -29,7 +35,7 @@ const Form = ()=>{
     <form onSubmit={(ev)=>sendForm(ev)}>
       <div>
         <label htmlFor='title'> Titulo </label>
-        <input type='text' id='title' value={title} onChange={(evt)=>setTitle(evt.target.value)}></input>
+        <input type='text' id='title' value={title} onChange={(evt)=>setTitle(evt.target.value)} ref={firsInput}></input>
       </div>
       <div>
         <label htmlFor='body'> Publicación </label>
@@ -40,40 +46,19 @@ const Form = ()=>{
   )
 }
 
-const Saludo = () => {
-  const [name,setName]=useState("");
-  return(
-    <div>
-      <input type='text' onChange={(ev)=>setName(ev.target.value)}></input>
-      <p>hola {name}</p>
-    </div>
-  )
-}
-
-const Button = () =>{
-
-  const[count, actCount] = useState(0); //hook
-
-  useEffect(()=>{
-    console.log("me ejecuto")
-
-    return ()=>{
-      console.log("adios");
-    }
-  },[]);
-  return(
-    <div>
-      <p>precionado: {count}</p>
-      <button onClick={()=>actCount(count+1)}>Clic me!</button>
-    </div>
-  )
+const Accordion = () =>{
+  const [show, setShow]=useState(false);
+  return(<div>
+    <button onClick={()=>setShow(true)}>Mostrar form</button>
+    {show && <Form showed={show} />}
+  </div>)
 }
 
 function App() {
   return (
     <div>
       <h1>
-        <Form/>
+        <Accordion/>
       </h1>
     </div>
   );
