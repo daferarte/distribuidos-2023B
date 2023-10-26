@@ -1,21 +1,32 @@
-import React, {Suspense, useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
+import Button from './Button';
+import Card from './Card';
 
-const Surprise = React.lazy(()=>import('./Surprise'));
+const theme ={
+  'dark':{
+    backgroundColor:'black',
+    color:'white'
+  },
+  'light':{
+    backgroundColor:'white',
+    color:'black'
+  }
+}
+
+export const ThemeContext = React.createContext();
+
 
 function App() {
 
-  const [showSurprise, setShowSurprise] = useState(false);
-
+  const [tema, setTheme] = useState(theme.dark);
   return (
     <div>
-      <Suspense fallback={<p>Cargando ...</p>}>
-        <button onClick={(evt) => setShowSurprise(true)}>
-          Mostrar sorpresa 
-        </button>
-        {
-          showSurprise && <Surprise/>
-        }
-      </Suspense>
+      <ThemeContext.Provider value={tema}>
+        <Button/>
+        <Card />
+        <button onClick={()=>setTheme(theme.light)}>Modo claro</button>
+        <button onClick={()=>setTheme(theme.dark)}>Modo oscuro</button>
+      </ThemeContext.Provider>
     </div>
   );
 }
