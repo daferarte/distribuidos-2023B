@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Link, useParams} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import SignIn from './users/SingIn';
 
 let NotImplemented = () => {
   return (
@@ -31,14 +32,14 @@ function App() {
         <Provider store={store}>
           <Routes>
             <Route path="/" element={<NotImplemented/>} />
-            <Route path="/login" element={<NotImplemented/>} />
+            <Route path="/login" element={<SignIn/>} />
 
             <Route path="user" element={<NotImplemented/>}>
               <Route path='register' element={<NotImplemented/>} />
               <Route path='delete/:id' element={<NotImplemented/>} />
               <Route path='update/:id' element={<NotImplemented/>} />
             </Route>
-            
+
             <Route path="*" element={<Eror404/>} />
           </Routes>
         </Provider>        
