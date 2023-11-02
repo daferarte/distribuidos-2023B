@@ -1,8 +1,16 @@
-version: "3.9"
+version: "3.6"
 
 services:
   backend-dev:
     restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.70'
+          memory: 512M
+        reservations:
+          cpus: '0.3'
+          memory: 250M
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
@@ -15,6 +23,14 @@ services:
 
   front-dev:
     restart: always
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.70'
+    #       memory: 512M
+    #     reservations:
+    #       cpus: '0.3'
+    #       memory: 200M
     build:
       context: ./fronted
       dockerfile: Dockerfile
@@ -28,6 +44,15 @@ services:
   db-dev:
     image: postgres
     restart: always
+    
+    deploy:
+      resources:
+        limits:
+          cpus: '0.70'
+          memory: 512M
+        reservations:
+          cpus: '0.3'
+          memory: 250M
     ports:
       - "5433:5432"
     environment:
@@ -40,6 +65,14 @@ services:
   db-auditoria:
     image: postgres
     restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.70'
+          memory: 512M
+        reservations:
+          cpus: '0.3'
+          memory: 250M
     ports:
       - "5434:5432"
     environment:
@@ -52,6 +85,14 @@ services:
   pgadmin-dev:
     image: dpage/pgadmin4
     restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.70'
+          memory: 512M
+        reservations:
+          cpus: '0.3'
+          memory: 250M
     ports:
       - "8081:80"
     environment:
