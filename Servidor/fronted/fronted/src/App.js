@@ -34,11 +34,11 @@ function App() {
             <Route path="/" element={<NotImplemented/>} />
             <Route path="/login" element={<SignIn/>} />
 
-            <Route path="user" element={<NotImplemented/>}>
-              <Route path='register' element={<NotImplemented/>} />
+            <Route path="user" element={<NotImplemented/>}></Route>
+              <Route path='user/register' element={<SignIn/>} />
               <Route path='delete/:id' element={<NotImplemented/>} />
               <Route path='update/:id' element={<NotImplemented/>} />
-            </Route>
+            
 
             <Route path="*" element={<Eror404/>} />
           </Routes>

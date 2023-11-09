@@ -28,7 +28,7 @@ const MostrarUsuarios = async(req=request, res=response)=>{
 
 const AgregarUsuario = async(req=request, res=response)=>{
 
-    let { email,  password} = req.body;
+    let { email,  password} = req.body.user;
     
     password=encriptar(password);
     
@@ -95,8 +95,8 @@ const EliminarUsuario =async(req=request, res=response)=>{
 }
 
 const iniciarSesion = async(req=request, res=response) =>{
-    let {email, password}=req.body;
-
+    let {email, password}=req.body.user;
+    console.log(req.body);
     const usuario= await prisma.user.findFirst({
         where: {
             email: email,

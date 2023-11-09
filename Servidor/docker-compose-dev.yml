@@ -3,14 +3,17 @@ version: "3.6"
 services:
   backend-dev:
     restart: always
-    deploy:
-      resources:
-        limits:
-          cpus: '0.70'
-          memory: 512M
-        reservations:
-          cpus: '0.3'
-          memory: 250M
+    # deploy:
+    #   mode: replicated
+    #   replicas: 8
+    #   endpoint_mode: vip
+    #   resources:
+    #     limits:
+    #       cpus: '0.70'
+    #       memory: 512M
+    #     reservations:
+    #       cpus: '0.3'
+    #       memory: 250M
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
@@ -100,6 +103,23 @@ services:
       PGADMIN_DEFAULT_PASSWORD: "12345"
     volumes:
       - ./baseDatos/pgadmin_data_dev:/var/lib/pgadmin
+    networks:
+      - devnet
+    
+  nginx:
+    restart: always
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    # volumes:
+    #   - ./mascomunitario/static:/home/app/web/static
+    #   - ./mascomunitario/media:/home/app/web/media
+      #- /etc/ssl/certs/propios/unicesmag:/certs
+    ports:
+      - 80:80
+      #- 443:443
+    # depends_on:
+    #   - web
     networks:
       - devnet
 
